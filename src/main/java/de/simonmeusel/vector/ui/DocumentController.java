@@ -34,6 +34,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 public class DocumentController implements Initializable {
+	public static final double ZOOM_FACTOR = 0.2;
 
 	@FXML
 	private Pane boardContainer;
@@ -351,4 +352,18 @@ public class DocumentController implements Initializable {
 			board.redraw();
 		}
 	}
+	
+	@FXML
+	private void zoomIn() {
+		board.getScreen().zoom(1 + ZOOM_FACTOR);
+		board.redraw();
+	}
+
+	
+	@FXML
+	private void zoomOut() {
+		board.getScreen().zoom(1 - ZOOM_FACTOR);
+		board.redraw();
+	}
+	
 }

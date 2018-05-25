@@ -24,6 +24,12 @@
          </padding>
          <children>
             <ComboBox fx:id="shapeSelection" prefHeight="27.0" prefWidth="10000.0" />
+            <HBox prefHeight="0.0" prefWidth="10000.0" spacing="8.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#zoomIn" prefWidth="10000.0" text="Zoom in" />
+                  <Button mnemonicParsing="false" onAction="#zoomOut" prefWidth="10000.0" text="Zoom out" />
+               </children>
+            </HBox>
          </children>
       </VBox>
    </left>
