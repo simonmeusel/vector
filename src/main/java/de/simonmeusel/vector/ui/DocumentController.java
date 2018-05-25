@@ -29,12 +29,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 public class DocumentController implements Initializable {
-	public static final double ZOOM_FACTOR = 0.2;
+	public static final double ZOOM_BUTTON_FACTOR = 0.2;
+	public static final double ZOOM_GESTURE_EXPONENT = 0.1;
 
 	@FXML
 	private Pane boardContainer;
@@ -355,15 +357,20 @@ public class DocumentController implements Initializable {
 	
 	@FXML
 	private void zoomIn() {
-		board.getScreen().zoom(1 + ZOOM_FACTOR);
+		board.getScreen().zoom(1 + ZOOM_BUTTON_FACTOR);
 		board.redraw();
 	}
 
 	
 	@FXML
 	private void zoomOut() {
-		board.getScreen().zoom(1 - ZOOM_FACTOR);
+		board.getScreen().zoom(1 - ZOOM_BUTTON_FACTOR);
 		board.redraw();
 	}
 	
+	@FXML
+	private void handleZoomEvent(ZoomEvent event) {
+		board.getScreen().zoom(Math.pow(event.getTotalZoomFactor(), ZOOM_GESTURE_EXPONENT));
+		board.redraw();
+	}
 }

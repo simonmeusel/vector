@@ -72,7 +72,7 @@
       </VBox>
    </right>
    <center>
-      <Pane fx:id="boardContainer" onScroll="#handleScroll" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="boardContainer" onScroll="#handleScroll" onZoom="#handleZoomEvent" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
       <MenuBar BorderPane.alignment="CENTER">
