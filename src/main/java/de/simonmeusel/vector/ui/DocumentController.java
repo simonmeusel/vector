@@ -37,6 +37,12 @@ import javafx.stage.FileChooser;
 public class DocumentController implements Initializable {
 	public static final double ZOOM_BUTTON_FACTOR = 0.2;
 	public static final double ZOOM_GESTURE_EXPONENT = 0.1;
+	/**
+	 * How much space should be left one each side of the snapped shape
+	 * 
+	 * Given as a multiplier to the width of the snapped shape
+	 */
+	public static final double SNAP_TO_SHAPE_WIDTH_FACTOR = 1;
 
 	@FXML
 	private Pane boardContainer;
@@ -69,6 +75,8 @@ public class DocumentController implements Initializable {
 	private MouseButton dragButton;
 
 	private Shape selectedShape;
+
+	private int nextSnapShapeIndex = 0;
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -133,7 +141,6 @@ public class DocumentController implements Initializable {
 		board.redraw();
 	}
 
-
 	@FXML
 	private void moveTowardsForeground() {
 		if (selectedShape != null) {
@@ -141,7 +148,6 @@ public class DocumentController implements Initializable {
 			board.redraw();
 		}
 	}
-
 
 	@FXML
 	private void moveTowardsBackground() {
@@ -151,7 +157,6 @@ public class DocumentController implements Initializable {
 		}
 	}
 
-
 	@FXML
 	private void moveToForeground() {
 		if (selectedShape != null) {
@@ -159,7 +164,6 @@ public class DocumentController implements Initializable {
 			board.redraw();
 		}
 	}
-
 
 	@FXML
 	private void moveToBackground() {
@@ -232,7 +236,7 @@ public class DocumentController implements Initializable {
 									.getShapeSubclassByName(shapeSelection.getSelectionModel().getSelectedItem());
 							dragShape = Shape.createShapeByBoundingBox(shapeClass, board,
 									new BoundingBox(dragStartPoint, newPoint));
-							
+
 							board.addShape(dragShape);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -326,7 +330,7 @@ public class DocumentController implements Initializable {
 		board.removeShape(selectedShape);
 		board.redraw();
 	}
-	
+
 	@FXML
 	private void saveToFile() throws IOException, ParserConfigurationException, TransformerException {
 		FileChooser fc = new FileChooser();
@@ -336,7 +340,7 @@ public class DocumentController implements Initializable {
 			new SVGCreator().create(out, board);
 		}
 	}
-	
+
 	@FXML
 	private void flipLine() {
 		if (selectedShape instanceof Line) {
@@ -345,7 +349,7 @@ public class DocumentController implements Initializable {
 			board.redraw();
 		}
 	}
-	
+
 	@FXML
 	private void flipArrow() {
 		if (selectedShape instanceof Arrow) {
@@ -354,23 +358,43 @@ public class DocumentController implements Initializable {
 			board.redraw();
 		}
 	}
-	
+
 	@FXML
 	private void zoomIn() {
 		board.getScreen().zoom(1 + ZOOM_BUTTON_FACTOR);
 		board.redraw();
 	}
 
-	
 	@FXML
 	private void zoomOut() {
 		board.getScreen().zoom(1 - ZOOM_BUTTON_FACTOR);
 		board.redraw();
 	}
-	
+
 	@FXML
 	private void handleZoomEvent(ZoomEvent event) {
 		board.getScreen().zoom(Math.pow(event.getTotalZoomFactor(), ZOOM_GESTURE_EXPONENT));
 		board.redraw();
+	}
+
+	@FXML
+	private void snapToNextShape() {
+		int maxIndex = board.getShapes().size() - 1;
+		if (maxIndex == -1) {
+			return;
+		}
+		if (nextSnapShapeIndex > maxIndex) {
+			nextSnapShapeIndex = 0;
+		}
+
+		Shape shape = board.getShapes().get(nextSnapShapeIndex);
+		double spacing = shape.getBoundingBox().getWidth() * SNAP_TO_SHAPE_WIDTH_FACTOR;
+		
+		board.getScreen().setPoints(shape.getBoundingBox().getLowerLeftPoint().add(-spacing, 0),
+				shape.getBoundingBox().getUpperRigthPoint().add(spacing, 0));
+		board.getScreen().calculateHeight();
+		board.redraw();
+
+		nextSnapShapeIndex++;
 	}
 }

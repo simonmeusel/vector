@@ -30,6 +30,7 @@
                   <Button mnemonicParsing="false" onAction="#zoomOut" prefWidth="10000.0" text="Zoom out" />
                </children>
             </HBox>
+            <Button mnemonicParsing="false" onAction="#snapToNextShape" prefWidth="10000.0" text="Snap to next shape" />
          </children>
       </VBox>
    </left>

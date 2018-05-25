@@ -11,7 +11,7 @@ public class Screen extends Box {
 		this.board = board;
 	}
 
-	protected void calculateHeight() {
+	public void calculateHeight() {
 		double height = getWidth() * board.getHeight() / board.getWidth();
 		getUpperRigthPoint().setX(getLowerLeftPoint().getX() + getWidth());
 		getUpperRigthPoint().setY(getLowerLeftPoint().getY() + height);
