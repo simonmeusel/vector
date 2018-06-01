@@ -78,11 +78,11 @@ public class Arrow extends Line {
 	}
 	
 	@Override
-	public Element createSVG(Document doc) {
+	public Element serializeSVG(Document doc) {
 		// Create group element
 		Element group = doc.createElement("g");
 		// Create line element
-		Element line = super.createSVG(doc);
+		Element line = super.serializeSVG(doc);
 		group.appendChild(line);
 		// Create tip element
 		Element tip = doc.createElement("polygon");

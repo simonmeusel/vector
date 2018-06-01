@@ -3,8 +3,8 @@ package de.simonmeusel.vector.io.svg;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public interface SVGCreateable {
+public interface SVGSerializeable {
 	
-	public Element createSVG(Document doc);
+	public Element serializeSVG(Document doc);
 	
 }

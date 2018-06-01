@@ -19,7 +19,7 @@ import de.simonmeusel.vector.board.shape.Ellipse;
 import de.simonmeusel.vector.board.shape.Line;
 import de.simonmeusel.vector.board.shape.Rectangle;
 import de.simonmeusel.vector.board.shape.Shape;
-import de.simonmeusel.vector.io.svg.SVGCreator;
+import de.simonmeusel.vector.io.svg.SVGSeralizer;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -337,7 +337,7 @@ public class DocumentController implements Initializable {
 		File file = fc.showSaveDialog(board.getScene().getWindow());
 		if (file != null) {
 			FileOutputStream out = new FileOutputStream(file);
-			new SVGCreator().create(out, board);
+			new SVGSeralizer().serialize(out, board);
 		}
 	}
 

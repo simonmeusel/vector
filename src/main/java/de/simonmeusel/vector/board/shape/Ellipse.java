@@ -6,9 +6,9 @@ import org.w3c.dom.Element;
 import de.simonmeusel.vector.board.Board;
 import de.simonmeusel.vector.board.BoundingBox;
 import de.simonmeusel.vector.board.Point;
-import de.simonmeusel.vector.io.svg.SVGCreateable;
+import de.simonmeusel.vector.io.svg.SVGSerializeable;
 
-public class Ellipse extends Shape implements SVGCreateable {
+public class Ellipse extends Shape implements SVGSerializeable {
 
 	public Ellipse(Board board, Point lowerLeftPoint, Point upperRigthPoint) {
 		super(board, new BoundingBox(lowerLeftPoint, upperRigthPoint));
@@ -24,7 +24,7 @@ public class Ellipse extends Shape implements SVGCreateable {
 	}
 
 	@Override
-	public Element createSVG(Document doc) {
+	public Element serializeSVG(Document doc) {
 		Element e = doc.createElement("ellipse");
 		// TODO
 		e.setAttribute("fill", Shape.getColorString(color));

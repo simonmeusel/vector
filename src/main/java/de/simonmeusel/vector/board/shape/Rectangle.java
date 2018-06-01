@@ -6,9 +6,9 @@ import org.w3c.dom.Element;
 import de.simonmeusel.vector.board.Board;
 import de.simonmeusel.vector.board.BoundingBox;
 import de.simonmeusel.vector.board.Point;
-import de.simonmeusel.vector.io.svg.SVGCreateable;
+import de.simonmeusel.vector.io.svg.SVGSerializeable;
 
-public class Rectangle extends Shape implements SVGCreateable {
+public class Rectangle extends Shape implements SVGSerializeable {
 
 	public Rectangle(Board board, Point lowerLeftPoint, Point upperRigthPoint) {
 		super(board, new BoundingBox(lowerLeftPoint, upperRigthPoint));
@@ -25,7 +25,7 @@ public class Rectangle extends Shape implements SVGCreateable {
 	}
 
 	@Override
-	public Element createSVG(Document doc) {
+	public Element serializeSVG(Document doc) {
 		Element e = doc.createElement("rect");
 		Point ll = getBoundingBox().getLowerLeftPoint();
 		Point ur = getBoundingBox().getUpperRigthPoint();

@@ -6,9 +6,9 @@ import org.w3c.dom.Element;
 import de.simonmeusel.vector.board.Board;
 import de.simonmeusel.vector.board.BoundingBox;
 import de.simonmeusel.vector.board.Point;
-import de.simonmeusel.vector.io.svg.SVGCreateable;
+import de.simonmeusel.vector.io.svg.SVGSerializeable;
 
-public class Line extends Shape implements SVGCreateable {
+public class Line extends Shape implements SVGSerializeable {
 	private boolean rotated;
 
 	/**
@@ -50,7 +50,7 @@ public class Line extends Shape implements SVGCreateable {
 	}
 
 	@Override
-	public Element createSVG(Document doc) {
+	public Element serializeSVG(Document doc) {
 		Element e = doc.createElement("line");
 		Point l = getLeftPoint();
 		Point r = getRigthPoint();

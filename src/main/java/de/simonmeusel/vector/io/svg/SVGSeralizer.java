@@ -1,6 +1,7 @@
 package de.simonmeusel.vector.io.svg;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,12 +19,12 @@ import org.w3c.dom.Element;
 import de.simonmeusel.vector.board.Board;
 import de.simonmeusel.vector.board.Point;
 import de.simonmeusel.vector.board.shape.Shape;
-import de.simonmeusel.vector.io.Creator;
+import de.simonmeusel.vector.io.Serializer;
 
-public class SVGCreator implements Creator {
+public class SVGSeralizer implements Serializer {
 
 	@Override
-	public void create(OutputStream out, Board board)
+	public void serialize(OutputStream out, Board board)
 			throws IOException, ParserConfigurationException, TransformerException {
 		// Prepare XML creation
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -44,8 +45,8 @@ public class SVGCreator implements Creator {
 		// Add shapes
 		for (Shape shape : board.getShapes()) {
 			// Add shape if possible
-			if (shape instanceof SVGCreateable) {
-				rootElement.appendChild(((SVGCreateable) shape).createSVG(doc));
+			if (shape instanceof SVGSerializeable) {
+				rootElement.appendChild(((SVGSerializeable) shape).serializeSVG(doc));
 			}
 			Point ll = shape.getBoundingBox().getLowerLeftPoint();
 			Point ur = shape.getBoundingBox().getUpperRigthPoint();
@@ -78,6 +79,11 @@ public class SVGCreator implements Creator {
 		transformer.transform(source, new StreamResult(out));
 
 		out.close();
+	}
+	
+	@Override
+	public void deserialize(InputStream in, Board board) {
+		throw new IllegalArgumentException();
 	}
 
 }

@@ -31,7 +31,7 @@ public class Dot extends Ellipse {
 	}
 
 	@Override
-	public Element createSVG(Document doc) {
+	public Element serializeSVG(Document doc) {
 		Element e = doc.createElement("circle");
 		Point ll = getBoundingBox().getLowerLeftPoint().add(RADIUS, RADIUS);
 		e.setAttribute("cx", "" + ll.getX());
