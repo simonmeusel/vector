@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
  */
 public class Board extends Canvas {
 
-	private ArrayList<Shape> shapes;
+	private ArrayList<Shape> shapes = new ArrayList<>();
 	private Screen screen;
 
 	GraphicsContext gc;
@@ -21,7 +21,6 @@ public class Board extends Canvas {
 	public Board() {
 		super();
 		screen = new Screen(this);
-		shapes = new ArrayList<>();
 
 		gc = getGraphicsContext2D();
 
@@ -38,15 +37,6 @@ public class Board extends Canvas {
 		// Draw initial shape
 		screen.calculateHeight();
 		redraw();
-
-		/*
-		 * setOnScroll(event -> { int multiplier = (int) Math.signum(event.getDeltaY() /
-		 * event.getMultiplierY()); System.out.println(multiplier);
-		 * screen.zoom(Math.pow(1.1, multiplier)); }); setOnZoom(event -> {
-		 * System.out.println(event.getTotalZoomFactor());
-		 * screen.zoom(((event.getTotalZoomFactor() - 1) / 4) + 1); });
-		 * setOnMouseClicked(event -> screen.zoom(1.5));
-		 */
 	}
 
 	/**
