@@ -1,5 +1,7 @@
 # vector
 
+![Screenshot](https://user-images.githubusercontent.com/16321843/40603919-aa0c5af4-625d-11e8-9617-3b03dc3459bd.png)
+
 This is a simple [JavaFX](https://en.wikipedia.org/wiki/JavaFX) vector graphics application. It was created in the context of a school task, but was expanded a little further. This project is using [Apache Maven](https://maven.apache.org/) for project management, and [Travis CI](https://travis-ci.org/) for CI and CD. You may use this project as a boilerplate for your own [JavaFX](https://en.wikipedia.org/wiki/JavaFX) projects under the terms of the [MIT license](https://choosealicense.com/licenses/mit/).
 
 ## Features
