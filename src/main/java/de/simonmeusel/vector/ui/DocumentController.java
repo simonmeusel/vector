@@ -1,6 +1,7 @@
 package de.simonmeusel.vector.ui;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -9,15 +10,14 @@ import java.util.ResourceBundle;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.xml.sax.SAXException;
+
 import de.simonmeusel.vector.board.Board;
 import de.simonmeusel.vector.board.BoundingBox;
 import de.simonmeusel.vector.board.Point;
 import de.simonmeusel.vector.board.Screen;
 import de.simonmeusel.vector.board.shape.Arrow;
-import de.simonmeusel.vector.board.shape.Dot;
-import de.simonmeusel.vector.board.shape.Ellipse;
 import de.simonmeusel.vector.board.shape.Line;
-import de.simonmeusel.vector.board.shape.Rectangle;
 import de.simonmeusel.vector.board.shape.Shape;
 import de.simonmeusel.vector.io.svg.SVGSeralizer;
 import javafx.collections.FXCollections;
@@ -33,6 +33,7 @@ import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class DocumentController implements Initializable {
 	public static final double ZOOM_BUTTON_FACTOR = 0.2;
@@ -63,7 +64,7 @@ public class DocumentController implements Initializable {
 	@FXML
 	private ComboBox<String> shapeSelection;
 
-	private Board board;
+	private Board board = new Board();
 
 	private boolean dragStarted = false;
 	private Shape dragShape = null;
@@ -80,19 +81,6 @@ public class DocumentController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		board = new Board();
-
-		// Add default shapes
-		board.addShape(new Rectangle(board, new Point(10, 10, board), new Point(30, 30, board)));
-		board.addShape(new Dot(board, new Point(500, 300, board)));
-		board.addShape(new Line(board, new Point(0, 0, board), new Point(400, 400, board), false));
-		board.addShape(new Ellipse(board, new Point(0, 0, board), new Point(100, 100, board)));
-
-		board.addShape(new Arrow(board, new Point(0, 300, board), new Point(400, 500, board), true, true, 30));
-		board.addShape(new Arrow(board, new Point(100, 300, board), new Point(500, 500, board), false, true, 30));
-		board.addShape(new Arrow(board, new Point(200, 300, board), new Point(600, 500, board), true, false, 30));
-		board.addShape(new Arrow(board, new Point(300, 300, board), new Point(700, 500, board), false, false, 30));
-
 		// Add board to pane
 		boardContainer.getChildren().add(board);
 
@@ -332,13 +320,32 @@ public class DocumentController implements Initializable {
 	}
 
 	@FXML
-	private void saveToFile() throws IOException, ParserConfigurationException, TransformerException {
+	private void saveToSVG() throws IOException, ParserConfigurationException, TransformerException {
 		FileChooser fc = new FileChooser();
+		fc.setSelectedExtensionFilter(new ExtensionFilter("SVG", "svg"));
 		File file = fc.showSaveDialog(board.getScene().getWindow());
 		if (file != null) {
 			FileOutputStream out = new FileOutputStream(file);
 			new SVGSeralizer().serialize(out, board);
 		}
+	}
+	
+	@FXML
+	private void openSVG() throws SAXException, IOException, ParserConfigurationException {
+		FileChooser fc = new FileChooser();
+		fc.setSelectedExtensionFilter(new ExtensionFilter("SVG", "svg"));
+		File file = fc.showOpenDialog(board.getScene().getWindow());
+		if (file != null) {
+			DocumentController dc = new DocumentController();
+			FileInputStream in = new FileInputStream(file);
+			new SVGSeralizer().deserialize(in, dc.board);
+			Application.getInstance().createDocumentStage(dc);
+		}
+	}
+	
+	@FXML
+	private void newDocument() throws IOException {
+		Application.getInstance().createDocumentStage(new DocumentController());
 	}
 
 	@FXML

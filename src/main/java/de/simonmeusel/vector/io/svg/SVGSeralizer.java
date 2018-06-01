@@ -15,6 +15,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import de.simonmeusel.vector.board.Board;
 import de.simonmeusel.vector.board.Point;
@@ -82,8 +83,8 @@ public class SVGSeralizer implements Serializer {
 	}
 	
 	@Override
-	public void deserialize(InputStream in, Board board) {
-		throw new IllegalArgumentException();
+	public void deserialize(InputStream in, Board board) throws SAXException, IOException, ParserConfigurationException {
+		// TODO
 	}
 
 }

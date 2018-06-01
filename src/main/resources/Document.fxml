@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.simonmeusel.vector.ui.DocumentController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox fx:id="toolBox" prefHeight="400.0" prefWidth="200.0" spacing="8.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
          <padding>
@@ -80,7 +80,10 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#saveToFile" text="Save as SVG" />
+                  <MenuItem mnemonicParsing="false" onAction="#newDocument" text="New" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveToSVG" text="Save as SVG" />
+                  <MenuItem mnemonicParsing="false" onAction="#openSVG" text="Open SVG" />
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
