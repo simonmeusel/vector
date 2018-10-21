@@ -14,7 +14,7 @@ This is a simple [JavaFX](https://en.wikipedia.org/wiki/JavaFX) vector graphics 
 
 ## Usage
 
-**If you just want to try out this program, you can download it from the #release page.**
+**If you just want to try out this program, you can download it from the [releases page](https://github.com/simonmeusel/vector/releases).**
 
 Prerequisites:
 * [Apache Maven](https://maven.apache.org/)
