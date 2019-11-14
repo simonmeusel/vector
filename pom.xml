@@ -4,38 +4,84 @@
 
   <groupId>de.simonmeusel</groupId>
   <artifactId>vector</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <packaging>jar</packaging>
 
   <name>vector</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/simonmeusel/vector</url>
 
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.release>13</maven.compiler.release>
+    <javafx.version>13</javafx.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <organization>
+    <name>Simon Meusel</name>
+  </organization>
 
   <build>
     <plugins>
       <plugin>
-        <groupId>com.zenjava</groupId>
-        <artifactId>javafx-maven-plugin</artifactId>
-        <version>8.8.3</version>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+              <release>${maven.compiler.release}</release>
+          </configuration>
+      </plugin>
+      <plugin>
+          <groupId>org.openjfx</groupId>
+          <artifactId>javafx-maven-plugin</artifactId>
+          <version>0.0.3</version>
+          <configuration>
+              <release>${maven.compiler.release}</release>
+              <jlinkImageName>vector</jlinkImageName>
+              <launcher>launcher</launcher>
+              <mainClass>vector/de.simonmeusel.vector.ui.Application</mainClass>
+          </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.0</version>
         <configuration>
-          <vendor>Simon Meusel</vendor>
-          <mainClass>de.simonmeusel.vector.ui.Application</mainClass>
+          <archive>
+            <manifest>
+              <mainClass>
+                  de.simonmeusel.vector.main.Main
+              </mainClass>
+            </manifest>
+          </archive>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.1</version>
+        <configuration>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
 
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-controls</artifactId>
+        <version>${javafx.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-fxml</artifactId>
+        <version>${javafx.version}</version>
     </dependency>
   </dependencies>
 </project>

@@ -5,10 +5,11 @@
 This is a simple [JavaFX](https://en.wikipedia.org/wiki/JavaFX) vector graphics application. It was created in the context of a school task, but was expanded a little further. This project is using [Apache Maven](https://maven.apache.org/) for project management, and [Travis CI](https://travis-ci.org/) for CI. You may use this project as a boilerplate for your own [JavaFX](https://en.wikipedia.org/wiki/JavaFX) projects under the terms of the [MIT license](https://choosealicense.com/licenses/mit/).
 
 ## Features
-* Drawing of shapes like rectangles, arrows and circles with custom colors
-* Moving and editing of shapes
-* Traversing the drawboard and zooming
-* Export of SVG files
+
+- Drawing of shapes like rectangles, arrows and circles with custom colors
+- Moving and editing of shapes
+- Traversing the drawboard and zooming
+- Export of SVG files
 
 **Attention!** This program shouldn't be used in production. There currently is no way of opening exported files. If you want to edit [SVG](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics)s, you may use the free and also open source [Inkscape](https://inkscape.org/en/).
 
@@ -17,21 +18,21 @@ This is a simple [JavaFX](https://en.wikipedia.org/wiki/JavaFX) vector graphics 
 **If you just want to try out this program, you can download it from the [releases page](https://github.com/simonmeusel/vector/releases).**
 
 Prerequisites:
-* [Apache Maven](https://maven.apache.org/)
-* [Source code of this repository](https://help.github.com/articles/cloning-a-repository/)
-* [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (not newer, see [javafx-maven-plugin](https://github.com/javafx-maven-plugin/javafx-maven-plugin/issues/287))
+
+- [Apache Maven](https://maven.apache.org/)
+- [Source code of this repository](https://help.github.com/articles/cloning-a-repository/)
+- [JDK 13](https://jdk.java.net/13/)
 
 To start this program from source, run:
 
 ```bash
-$ mvn jfx:run
+$ mvn javafx:run
 ```
 
-To build this project into a jar file and gerate native files, run:
+To build this project into a jar file:
 
 ```bash
-$ mvn jfx:build-jar
-$ mvn jfx:build-native
+$ mvn clean package
 ```
 
 ## License
