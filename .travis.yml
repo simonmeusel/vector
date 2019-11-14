@@ -3,11 +3,3 @@ jdk:
   - openjdk13
 build:
   - mvn install
-deploy:
-  provider: releases
-  api_key:
-    secure: izOiEQWTDKfc3nI7wG2wptLuENMUtRZEoe7UkaQMq867T2T4kjW7sotco/qJUOBrCZ8Iep8/bjB9xog1JNnKap4W2YfN9L3AL0PXxKyrG/DT+WoLjDhBtxTHOLPYuzsaBJZqBmU5DGaxL4+y6MbTocHJ23DDNzip/qPiyaKTu5lrhLnetIGlE4vZ/d3Z1wtXQUzJrzVvt84ZHc02KEuW2YwpMhfCUoXDVQcUlM5ihAZzwUwLGWTSmxVWhpI/fv2/QZmcNyyHf5pOjs3K2OfcumFXqFst2xqWIMlTCJxWvQlei6Dey090b1+7dWHC3mv++xDDEjAVZRUILzLieUw8QHYJ12HfcaeqF0JTRwMrWzYb1OyF9KXpMdt4DrVOEq76aYlznZvGGmZBm9CoTrIQOD6Nf+UX3jbGAaX42LxYAOG7jLVxrHFSxJiSVovnyUNnxi4j8tb72Di4NIzpSHCIo+/zZaDX9pzLhOYyL+Z+3KHEJFyw1/iZSn7IPfiDogEqeMnBDlAsqooChHEB4+FaPQ6BV8LLe/JnhYPf1/YAl3D4WveMQfzNcSZ7gyJI+1kuDFyaITPGPWeZltqcbRkVQBQhGpxObjj/uvCavoa/tPGFAj52L7rj77c+wVm9Rw5dCxIANWBSxRNqmINhdGxvX2Hw9BakqREYMxcJle/CbRI=
-  file: target/vector-1.1.0.jar
-  skip_cleanup: true
-  on:
-    tags: true
